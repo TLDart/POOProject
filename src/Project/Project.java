@@ -7,6 +7,7 @@ public class Project {
     private String name;
     private String nick;
     private Calendar startDate;
+    private Calendar estimatedEnd;
     private Calendar endDate;
     private Teacher mainTeacher;
     private Boolean finished;
@@ -14,16 +15,30 @@ public class Project {
     private ArrayList<Scholar> scholars;
     private ArrayList<Task> tasks;
 
-    public Project(String name, String nick, Calendar startDate, Calendar endDate, Teacher mainTeacher) {
+    public Project(String name, String nick, Calendar startDate, Calendar estimatedEnd, Teacher mainTeacher, ArrayList<Teacher> teachers, ArrayList<Scholar> scholars, ArrayList<Task> tasks) {
         this.name = name;
         this.nick = nick;
         this.startDate = startDate;
-        this.endDate = endDate;
+        this.estimatedEnd = estimatedEnd;
         this.mainTeacher = mainTeacher;
+        this.teachers = teachers;
+        this.scholars = scholars;
+        this.tasks = tasks;
+        this.finished = false;
+        this.endDate = null;
     }
 
-    public void createTask(int type,int id, Calendar startDate, Calendar estimatedFinish, Calendar endTime) {
-        if(type == 1)
+    public Project(String name, String nick, Calendar startDate, Calendar estimatedEnd, Teacher mainTeacher) {
+        this.name = name;
+        this.nick = nick;
+        this.startDate = startDate;
+        this.estimatedEnd = estimatedEnd;
+        this.mainTeacher = mainTeacher;
+        this.endDate = null;
+    }
+
+    public void createTask(int type, int id, Calendar startDate, Calendar estimatedFinish, Calendar endTime) {
+        if (type == 1)
             this.tasks.add(new Documentation (id, startDate, estimatedFinish));
         if(type == 2)
             this.tasks.add(new Development (id, startDate, estimatedFinish));
@@ -42,7 +57,7 @@ public class Project {
         return tasks;
     }
     public boolean deleteTask(Task t){
-        this.tasks.remove(t);
+        return this.tasks.remove(t);
     }
     public Task getTaskById(int id){
         for(Task t: this.tasks){
@@ -52,19 +67,24 @@ public class Project {
         }
         return null;
     }
-    public boolean verifyValidDate(){
+    //public boolean verifyValidDate(){
 
-    }
-    public void updateTaskStatus(Task t, int value){
+    //}
+    public void updateTaskStatus(Task t, int value) {
         t.setStatus(value);
     }
-    public void giveTask(Person p,Task t){
 
+    public void giveTask(Person p, Task t) {//TODO: giving tasks to Scholars verify date
+        if (!p.overloaded(t.getStartDate()) || p != this.mainTeacher) {
+            p.addTask(t);
+            t.resposible = p;
+        }
     }
-    public ArrayList<Task> listNotStarted(){
+
+    public ArrayList<Task> listNotStarted() {
         ArrayList<Task> tasks = new ArrayList<>();
-        for(Task t : this.tasks){
-            if(t.getStatus() == 0){
+        for (Task t : this.tasks) {
+            if (t.getStatus() == 0) {
                 tasks.add(t);
             }
         }
@@ -83,14 +103,20 @@ public class Project {
         ArrayList<Task> tasks = new ArrayList<>();
         for(Task t : this.tasks){
             if(t.endTime != null) {
-                if (t.endTime.after(t.estimatedFinish)) {
+                if (t.endTime.after(t.getEstimatedFinish())) {
                     tasks.add(t);
                 }
             }
         }
         return tasks;
     }
-    public int getTotalPrice(){
+    public int getTotalPrice() {
+        int total = 0;
+        for (Scholar s : this.scholars) {
+            int monthSpan = (s.getStartDate().get(Calendar.MONTH) - s.getEndDate().get(Calendar.MONTH)) * 12 + (s.getStartDate().get(Calendar.MONTH) - s.getEndDate().get(Calendar.MONTH)) + 1;
+            total += monthSpan * s.getSalary();
+        }
+        return total;
     }
     public void closeProject(){
         this.setFinished(true);
@@ -122,5 +148,9 @@ public class Project {
 
     public void setFinished(Boolean finished) {
         this.finished = finished;
+    }
+
+    public Calendar getEstimatedEnd() {
+        return estimatedEnd;
     }
 }
