@@ -1,146 +1,139 @@
 package UI;
-import Project.*;
+import Backend.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CreateProject extends JFrame {
-    private JTextField nameTextField,nickTextField,endDateTextField;
+    JComboBox mainT;
+    private JFrame frame;
+    private JPanel panelA, panelB;
+    private JTextField name, nick, endDate, startDate;
+    private Center center;
+    private JList teachersList, peopleList;
+
     CreateProject(Center center) {
-        JFrame frame = new JFrame();
-        frame.setTitle("Creating Project");
-        frame.setSize(500, 500);
+        this.center = center;
+        frame = new JFrame();
+        frame.setTitle("Add someone to a project");
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setBackground(Color.GRAY);
 
-        // Upper Panel
+        panelA = drawPanel();
+        panelB = bottomFrame();
 
-        JLabel nameLabel = new JLabel("Name");
-        JTextField nameTextField = new JTextField();
-        JButton nameButton = new JButton("Add");
-        nameButton.addActionListener(new ButtonListener());
-        nameButton.setActionCommand("add1");
+        panelA.setVisible(true);
+        panelB.setVisible(true);
+        frame.add(panelA, BorderLayout.CENTER);
+        frame.add(panelB, BorderLayout.SOUTH);
 
-        JLabel nickLabel = new JLabel("Nick");
-        JTextField nickTextField = new JTextField();
-        JButton nickButton = new JButton("Add");
-        nickButton.addActionListener(new ButtonListener());
-        nickButton.setActionCommand("add2");
+        frame.setVisible(true);
+    }
 
-        JLabel endDateLabel=new JLabel("Data Final(Dia/Mês/Ano)");
-        JTextField endDateTextField= new JTextField();
-        JButton endDateButton=new JButton("Add");
-        endDateButton.addActionListener(new ButtonListener());
-        endDateButton.setActionCommand("add3");
+    private JPanel drawPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 1));
+
+        JLabel nameLabel = new JLabel("Name: ");
+        name = new JTextField();
+        name.setHorizontalAlignment(SwingConstants.CENTER);
 
 
-        JPanel upperPanel= new JPanel();
-        upperPanel.setLayout(new GridLayout(3,3));
+        JLabel nickLabel = new JLabel("Nick: ");
+        nick = new JTextField(10);
+        nick.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel startDateLabel = new JLabel("StartDate(dd-mm-yyyy)");
+        startDate = new JTextField(10);
+        startDate.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel endDateLabel = new JLabel("StartDate(dd-mm-yyyy)");
+        endDate = new JTextField(10);
+        endDate.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new GridLayout(4, 2));
+
         upperPanel.add(nameLabel);
-        upperPanel.add(nameTextField);
-        upperPanel.add(nameButton);
+        upperPanel.add(name);
+
         upperPanel.add(nickLabel);
-        upperPanel.add(nickTextField);
-        upperPanel.add(nickButton);
+        upperPanel.add(nick);
+        upperPanel.add(startDateLabel);
+        upperPanel.add(startDate);
         upperPanel.add(endDateLabel);
-        upperPanel.add(endDateTextField);
-        upperPanel.add(endDateButton);
+        upperPanel.add(endDate);
 
+        mainT = new JComboBox();
 
-        // Middle Panel
+        mainT = new JComboBox<Project>();
+        mainT.addItem("Choose a main Teacher");
+        for (Teacher t : center.getTeachers()) {
+            mainT.addItem(t);
+        }
 
-        /*DefaultListModel<Teacher> teacherListModel=new DefaultListModel<Teacher>();
+        DefaultListModel<Teacher> teacherListModel = new DefaultListModel<Teacher>();
         for (Teacher t : center.getTeachers())
             teacherListModel.addElement(t);
-        JList teacherslist=new JList(teacherListModel);
-        teacherslist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane teacherScroller= new JScrollPane(teacherslist);
+        teachersList = new JList(teacherListModel);
+        JScrollPane teacherScroller = new JScrollPane(teachersList);
 
-        JButton addMainTeacherButton = new JButton("Add Main Teacher");
-        addMainTeacherButton.addActionListener(new ButtonListener());
-        addMainTeacherButton.setActionCommand("add3"); */
 
-        DefaultListModel<Person> peopleListModel = new DefaultListModel<Person>();
-        for (Teacher t : center.getTeachers())
-            peopleListModel.addElement(t);
-        for (Scholar s : center.getScholars())
+        DefaultListModel<Scholar> peopleListModel = new DefaultListModel<>();
+        for (Scholar s : center.listFreeScholar())
             peopleListModel.addElement(s);
-        JList peopleList = new JList(peopleListModel);
-        JScrollPane peopleScroller = new JScrollPane(peopleList);
+        peopleList = new JList(peopleListModel);
+        JScrollPane scholarScroller = new JScrollPane(peopleList);
 
-        JButton addPeopleButton = new JButton("Add People");
-        addPeopleButton.addActionListener(new ButtonListener());
-        addPeopleButton.setActionCommand("add4");
+        panel.add(upperPanel);
+        panel.add(mainT);
+        panel.add(teacherScroller);
+        panel.add(scholarScroller);
 
-        JPanel middlePanel = new JPanel();
-        middlePanel.setLayout(new GridLayout(1, 1));
-        //middlePanel.add(teacherScroller);
-        middlePanel.add(peopleScroller);
+        panel.setVisible(true);
+        return panel;
+    }
 
-        //Bottom Panel
+    public JPanel bottomFrame() {
+        JPanel panel = new JPanel();
+        JButton button = new JButton();
+        JButton button2 = new JButton();
+        button2.setVisible(false);
+        panel.setLayout(new GridLayout(1, 2));
 
-        JButton back = new JButton("Back");
-        back.addActionListener(new ButtonListener());
-        back.setActionCommand("back");
-        JButton create = new JButton("Create");
-        create.addActionListener(new ButtonListener());
-        create.setActionCommand("create");
+        button.setText("Back");
+        button.setActionCommand("back");
+        button.addActionListener(new ButtonListener());
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new GridLayout(1,2));
-        bottomPanel.add(back);
-        bottomPanel.add(create);
+        button2.setText("Create");
+        button2.setActionCommand("Create");
+        button2.addActionListener(new ButtonListener());
 
-        frame.add(upperPanel,BorderLayout.NORTH);
-        frame.add(middlePanel, BorderLayout.CENTER);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
-        frame.setVisible(true);
-
-
-
-
-
-
-
-
-
-
-
-
-
+        panel.add(button);
+        panel.add(button2);
+        return panel;
 
     }
+
+
     private class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
-            Center center = new Center();
-            String name,nick;
-            Calendar start=new GregorianCalendar();
-            Calendar end = new GregorianCalendar();
-            if(cmd.equals("add1")) {
-                name = nameTextField.getText();
+            if (cmd.equals("back")) {
+                frame.setVisible(false);
+                frame.dispose();
+                new MainMenu(center);
             }
-            if(cmd.equals("add2")) {
-                nick = nickTextField.getText();
-            }
-            if(cmd.equals("add3")){
-                String st= endDateTextField.getText();
-                String[] result=st.split("\\s");
-                int day=Integer.parseInt(result[0]);
-                int month=Integer.parseInt(result[1]);
-                int year=Integer.parseInt(result[2]);
-                end.set(day, month, year);
-            }
-            if(cmd.equals("add4"));
+            if (cmd.equals("create")) {
 
-            if(cmd.equals("back"));
-            if(cmd.equals("create"));
-                center.createProject(name,nick,start.getTime(),end.getTime(),);
+            }
         }
     }
 }

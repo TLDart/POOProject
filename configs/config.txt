@@ -1,0 +1,6 @@
+Teacher,MaregaJesus,marega@jesus.ceu,69,Obras do Senhor,42069
+Bachelor,Peseiro,peseiro@jafostecocaralho.com,88,1-6-2018,1-9-2018,MaregaJesus
+PhD,Bale,gareth@golfscotlandwales.rip,1337,1-3-2019,3-3-2020,MaregaJesus
+Graduate,Joao Felis,joaofelis@nudes.com,420,12-2-2012,14-4-2014,MaregaJesus
+Project,SportingRevolute,SPCR,10-9-2010,10-20-2025,MaregaJesus,_Peseiro,_Joao Felis,_Bale
+Design,1,12-12-2012,13-13-2014,SportingRevolute,Bale

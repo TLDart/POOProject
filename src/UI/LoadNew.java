@@ -1,6 +1,6 @@
 package UI;
 
-import Project.Center;
+import Backend.Center;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,9 +55,10 @@ public class LoadNew extends JFrame {
         JPanel panel = new JPanel();
         JLabel labelName = new JLabel("Insert the name of the center");
         name = new JTextField(10);
+        name.setHorizontalAlignment(JTextField.CENTER);
         JLabel label = new JLabel("Insert the name of the file to load items from:");
         text = new JTextField(10);
-
+        text.setHorizontalAlignment(JTextField.CENTER);
         panel.add(labelName);
         panel.add(name);
         panel.add(label);
@@ -78,16 +79,20 @@ public class LoadNew extends JFrame {
             }
 
             if (cmd.equals("Next")) {
-                frame.setVisible(false);
-                frame.dispose();
-                Center center = new Center();
-                if (center.simpleBootloader(name.getText(), text.getText())) {
-                    frame.setVisible(false);
-                    frame.dispose();
-                    new MainMenu(center);
+                if (name.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Empty File Name", "Error", JOptionPane.WARNING_MESSAGE);
+
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid File", "Error", JOptionPane.WARNING_MESSAGE);
+                    Center center = new Center(name.getText());
+                    if (center.simpleBootloader("./configs/" + text.getText())) {
+                        frame.setVisible(false);
+                        frame.dispose();
+                        new MainMenu(center);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid File", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
+
             }
         }
 

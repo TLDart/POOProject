@@ -1,10 +1,11 @@
 package UI;
 
-import Project.*;
+import Backend.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class LoadMain extends JFrame {
     private JPanel panelA, panelB;
@@ -85,7 +86,7 @@ public class LoadMain extends JFrame {
                 }
                 if (optionB.isSelected()) {
                     Center center = new Center();
-                    if (center.bootloader(text.getText())) {
+                    if (text.getText().endsWith(".obj") && center.bootloader("/saves/" + text.getText())) {
                         frame.setVisible(false);
                         frame.dispose();
                         new MainMenu(center);
