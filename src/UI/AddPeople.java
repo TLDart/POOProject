@@ -112,7 +112,7 @@ public class AddPeople {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
-            if (cmd.equals("add")) {
+            if (cmd.equals("add")) {//TODO THIS
 
             }
             if (cmd.equals(("back"))) {

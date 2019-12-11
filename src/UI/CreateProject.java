@@ -1,17 +1,20 @@
 package UI;
+
 import Backend.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class CreateProject extends JFrame {
     JComboBox mainT;
     private JFrame frame;
     private JPanel panelA, panelB;
-    private JTextField name, nick, endDate, startDate;
+    private JTextField name, nick, startDateDay, startDateMonth, startDateYear, endDateDay, endDateMonth, endDateYear;
     private Center center;
     private JList teachersList, peopleList;
 
@@ -38,7 +41,12 @@ public class CreateProject extends JFrame {
 
     private JPanel drawPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 1));
+        panel.setLayout(new GridLayout(7, 1));
+
+        JLabel title = new JLabel("Create a New Project");
+        title.setFont(new Font("Monaco", Font.BOLD, 17));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+
 
         JLabel nameLabel = new JLabel("Name: ");
         name = new JTextField();
@@ -49,26 +57,45 @@ public class CreateProject extends JFrame {
         nick = new JTextField(10);
         nick.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel startDateLabel = new JLabel("StartDate(dd-mm-yyyy)");
-        startDate = new JTextField(10);
-        startDate.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel startDatePanel = new JPanel(new GridLayout(1, 4));
+        JLabel startDateLabel = new JLabel("StartDate");
+        startDateLabel.setToolTipText("dd-mm-yyyy");
+        startDateDay = new JTextField(22);
+        startDateDay.setHorizontalAlignment(SwingConstants.CENTER);
+        startDateMonth = new JTextField(22);
+        startDateMonth.setHorizontalAlignment(SwingConstants.CENTER);
+        startDateYear = new JTextField(22);
+        startDateYear.setHorizontalAlignment(SwingConstants.CENTER);
 
-        JLabel endDateLabel = new JLabel("StartDate(dd-mm-yyyy)");
-        endDate = new JTextField(10);
-        endDate.setHorizontalAlignment(SwingConstants.CENTER);
+        startDatePanel.add(startDateLabel);
+        startDatePanel.add(startDateDay);
+        startDatePanel.add(startDateMonth);
+        startDatePanel.add(startDateYear);
+
+        JPanel endDatePanel = new JPanel(new GridLayout(1, 4));
+        JLabel endDateLabel = new JLabel("EndDate");
+        endDateLabel.setToolTipText("dd-mm-yyyy");
+        endDateDay = new JTextField(2);
+        endDateDay.setHorizontalAlignment(SwingConstants.CENTER);
+        endDateMonth = new JTextField(2);
+        endDateMonth.setHorizontalAlignment(SwingConstants.CENTER);
+        endDateYear = new JTextField(4);
+        endDateYear.setHorizontalAlignment(SwingConstants.CENTER);
+
+        endDatePanel.add(endDateLabel);
+        endDatePanel.add(endDateDay);
+        endDatePanel.add(endDateMonth);
+        endDatePanel.add(endDateYear);
 
         JPanel upperPanel = new JPanel();
-        upperPanel.setLayout(new GridLayout(4, 2));
+        upperPanel.setLayout(new GridLayout(2, 2));
 
         upperPanel.add(nameLabel);
         upperPanel.add(name);
 
         upperPanel.add(nickLabel);
         upperPanel.add(nick);
-        upperPanel.add(startDateLabel);
-        upperPanel.add(startDate);
-        upperPanel.add(endDateLabel);
-        upperPanel.add(endDate);
+
 
         mainT = new JComboBox();
 
@@ -91,7 +118,10 @@ public class CreateProject extends JFrame {
         peopleList = new JList(peopleListModel);
         JScrollPane scholarScroller = new JScrollPane(peopleList);
 
+        panel.add(title);
         panel.add(upperPanel);
+        panel.add(startDatePanel);
+        panel.add(endDatePanel);
         panel.add(mainT);
         panel.add(teacherScroller);
         panel.add(scholarScroller);
@@ -118,7 +148,6 @@ public class CreateProject extends JFrame {
         panel.add(button);
         panel.add(button2);
         return panel;
-
     }
 
 
@@ -126,13 +155,13 @@ public class CreateProject extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
+            String format = "dd-MM-yyyy";
             if (cmd.equals("back")) {
                 frame.setVisible(false);
                 frame.dispose();
                 new MainMenu(center);
             }
-            if (cmd.equals("create")) {
-
+            if (cmd.equals("create")) {//TODO THIS
             }
         }
     }

@@ -150,7 +150,9 @@ public class Center implements Serializable {
                 }
 
             }
+            br.close();
         } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -161,10 +163,12 @@ public class Center implements Serializable {
             File f = new File(pathName + ".obj");
             ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(f));
             os.writeObject(this);
+            os.close();
         } catch (IOException e) {
             System.out.print("File Error Outbound");
             return false;
         }
+
         return true;
     }
 

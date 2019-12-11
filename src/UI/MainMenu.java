@@ -6,7 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.cert.CRLReason;
+import java.io.*;
+import java.util.ArrayList;
 
 public class MainMenu extends JFrame {
     private JPanel panelA, panelB;
@@ -93,6 +94,28 @@ public class MainMenu extends JFrame {
 
     }
 
+    private void saveToCache(String pathToSave) {
+        File f = new File("./configs/cache.txt");
+        ArrayList<String> names = new ArrayList<>();
+        String s;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            while ((s = br.readLine()) != null) {
+                names.add(s);
+            }
+            br.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f, false));
+            bw.write(pathToSave + ".obj" + "\n");
+            for (int i = 0; i < 2 && i < names.size() && !names.isEmpty(); i++) {
+                if (!names.get(i).equals(pathToSave + ".obj"))
+                    bw.write(names.get(i) + "\n");
+            }
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private class ButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -118,6 +141,7 @@ public class MainMenu extends JFrame {
                     if (center.saveProject("./saves/" + center.getName())) {
                         JOptionPane.showMessageDialog(null,
                                 "File Saved Successfully");
+                        saveToCache(center.getName());
                         saveSwitch = 1;
                     }
                     break;
