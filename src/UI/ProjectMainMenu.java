@@ -8,18 +8,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
-public class MainMenu extends JFrame {
+public class ProjectMainMenu extends JFrame {
     private JPanel panelA, panelB;
     private JFrame frame;
-    private JButton createProject, addPersonel, listConcluded, listNotConcluded, listPeople, save, back;
+    private JButton createTask, listTask, getCost, finish, listPeople, save, back;
     private Center center;
+    private Project project;
     private int saveSwitch = 0;
 
-    MainMenu(Center center) {
+    ProjectMainMenu(Center center, Project project) {
         this.center = center;
+        this.project = center.getProjectByName(project.getName());
         frame = new JFrame();
-        frame.setTitle(center.getName());
+        frame.setTitle(project.getName());
         frame.setSize(300, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -40,34 +43,34 @@ public class MainMenu extends JFrame {
     private JPanel drawPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 1));
-        createProject = new JButton();
-        addPersonel = new JButton();
-        listConcluded = new JButton();
-        listNotConcluded = new JButton();
+        createTask = new JButton();
+        listTask = new JButton();
+        getCost = new JButton();
+        finish = new JButton();
         listPeople = new JButton();
 
-        createProject.setText("Create a new Project");
-        addPersonel.setText("Add People");
-        listConcluded.setText("List Concluded Projects");
-        listNotConcluded.setText("List Not Concluded Projects");
-        listPeople.setText("List People");
+        createTask.setText("Create a task");
+        listTask.setText("List Task");
+        getCost.setText("Get Cost");
+        finish.setText("Finish");
+        listPeople.setText("List people");
 
-        createProject.setActionCommand("Create a new Project");
-        addPersonel.setActionCommand("Add People");
-        listConcluded.setActionCommand("List Concluded Projects");
-        listNotConcluded.setActionCommand("List Not Concluded Projects");
-        listPeople.setActionCommand("List People");
+        createTask.setActionCommand("Create a task");
+        listTask.setActionCommand("List Task");
+        getCost.setActionCommand("Get Cost");
+        finish.setActionCommand("Finish");
+        listPeople.setActionCommand("list people");
 
-        createProject.addActionListener(new ButtonListener());
-        addPersonel.addActionListener(new ButtonListener());
-        listConcluded.addActionListener(new ButtonListener());
-        listNotConcluded.addActionListener(new ButtonListener());
+        createTask.addActionListener(new ButtonListener());
+        listTask.addActionListener(new ButtonListener());
+        getCost.addActionListener(new ButtonListener());
+        finish.addActionListener(new ButtonListener());
         listPeople.addActionListener(new ButtonListener());
 
-        panel.add(createProject);
-        panel.add(addPersonel);
-        panel.add(listConcluded);
-        panel.add(listNotConcluded);
+        panel.add(createTask);
+        panel.add(listTask);
+        panel.add(getCost);
+        panel.add(finish);
         panel.add(listPeople);
         panel.setVisible(true);
         return panel;
@@ -94,7 +97,7 @@ public class MainMenu extends JFrame {
 
     }
 
-    public void saveToCache(String pathToSave) {
+    private void saveToCache(String pathToSave) {
         File f = new File("./configs/cache.txt");
         ArrayList<String> names = new ArrayList<>();
         String s;
@@ -124,12 +127,12 @@ public class MainMenu extends JFrame {
                 case "back":
                     if (saveSwitch != 1) {
                         int confirmed = JOptionPane.showConfirmDialog(null,
-                                "You have unsaved Changes. Do You want to go back to the Main Menu?", "Save",
+                                "You have unsaved! Changes Do You want to go back to the Main Menu?", "Save",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmed == JOptionPane.YES_OPTION) {
                             frame.setVisible(false);
                             frame.dispose();
-                            new LoadMain();
+                            new MainMenu(center);
                         }
                     } else {
                         frame.setVisible(false);
@@ -145,32 +148,31 @@ public class MainMenu extends JFrame {
                         saveSwitch = 1;
                     }
                     break;
-                case "Create a new Project":
+                case "Create a task":
                     frame.setVisible(false);
                     frame.dispose();
-                    new CreateProject(center);
+                    //new CreateProject(center);
                     break;
-                case "List People":
+                case "List Task":
                     frame.setVisible(false);
                     frame.dispose();
-                    new ListPeople(center);
+                    new ListTasks(center, project);
                     break;
-                case "List Concluded Projects":
-                    frame.setVisible(false);
-                    frame.dispose();
-                    new ListConcluded(center);
+                case "Get Cost":
+                    JOptionPane.showMessageDialog(null, project.getTotalPrice(), "Cost of the project", JOptionPane.WARNING_MESSAGE);
                     break;
-                case "List Not Concluded Projects":
+                case "list people":
                     frame.setVisible(false);
                     frame.dispose();
+                    new ProjectListPeople(center, project);
+                    break;
+                case "Finish":
+                    project.setFinished(true);
+                    project.setEndDate(new GregorianCalendar());
                     new ListNotConcluded(center);
-                    break;
-                case "Add People":
-                    frame.setVisible(false);
-                    frame.dispose();
-                    new AddPeople(center);
                     break;
             }
         }
     }
+
 }

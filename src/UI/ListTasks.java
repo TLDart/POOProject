@@ -7,17 +7,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ListPeople extends JFrame {
+public class ListTasks extends JFrame {
     private JPanel panelA, panelB;
     private JFrame frame;
     private JButton search, back;
     private Center center;
+    private Project project;
     private JList list;
 
-    ListPeople(Center center) {
+    ListTasks(Center center, Project project) {
         this.center = center;
         frame = new JFrame();
-        frame.setTitle("People Available in the Center");
+        frame.setTitle("Task Done");
         frame.setSize(300, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
@@ -39,7 +40,7 @@ public class ListPeople extends JFrame {
         JPanel panel = new JPanel();
         //panel.setLayout(new GridLayout(2, 1));
 
-        String str = "<html>People Available at the Center <br/> Hit Search for more info</html>"; //Make a formatted string, same label but with a breakline
+        String str = "<html>Task on the current project<br/> Hit Search for more info</html>"; //Make a formatted string, same label but with a breakline
 
         JLabel partA = new JLabel(str);
         partA.setHorizontalAlignment(SwingConstants.CENTER);

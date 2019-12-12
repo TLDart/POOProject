@@ -65,7 +65,6 @@ public class Infoframe extends JFrame {
         JPanel panel = new JPanel();
         JButton button = new JButton();
         JButton button2 = new JButton();
-        button2.setVisible(false);
         panel.setLayout(new GridLayout(1, 2));
 
         button.setText("Close");
@@ -91,7 +90,7 @@ public class Infoframe extends JFrame {
                 frame.dispose();
             }
             if (cmd.equals("get info")) {
-                //new InframeTask((Task) list.getSelectedValue());
+                new InframeTask((Task) list.getSelectedValue());
             }
 
         }

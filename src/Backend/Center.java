@@ -116,7 +116,7 @@ public class Center implements Serializable {
                                 new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0]))));
                     } else {
                         getProjectByName(parsedData[4]).getTasks().add(new Development(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
-                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5])));
+                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5]), Integer.parseInt(parsedData[6])));
                     }
 
                 }
@@ -128,7 +128,7 @@ public class Center implements Serializable {
                                 new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0]))));
                     } else {
                         Design task = new Design(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
-                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5]));
+                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5]), Integer.parseInt(parsedData[6]));
 
                         getProjectByName(parsedData[4]).getTasks().add(task);
                         getPersonbByName(parsedData[5]).getTasks().add(task);
@@ -136,19 +136,17 @@ public class Center implements Serializable {
 
 
                 }
-                if (parsedData[0].equals("Design")) {
+                if (parsedData[0].equals("Documentation")) {
                     String[] parsedCalendarA = parsedData[2].split("-");
                     String[] parsedCalendarB = parsedData[3].split("-");
                     if (parsedData.length == 5) {
-                        getProjectByName(parsedData[4]).getTasks().add(new Design(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
+                        getProjectByName(parsedData[4]).getTasks().add(new Documentation(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
                                 new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0]))));
                     } else {
-                        getProjectByName(parsedData[4]).getTasks().add(new Design(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
-                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5])));
+                        getProjectByName(parsedData[4]).getTasks().add(new Documentation(Integer.parseInt(parsedData[1]), new GregorianCalendar(Integer.parseInt(parsedCalendarA[2]), Integer.parseInt(parsedCalendarA[1]), Integer.parseInt(parsedCalendarA[0])),
+                                new GregorianCalendar(Integer.parseInt(parsedCalendarB[2]), Integer.parseInt(parsedCalendarB[1]), Integer.parseInt(parsedCalendarB[0])), getPersonbByName(parsedData[5]), Integer.parseInt(parsedData[6])));
                     }
-
                 }
-
             }
             br.close();
         } catch (IOException e) {
@@ -276,16 +274,14 @@ public class Center implements Serializable {
     }
 
     private Boolean isFinished(Project p) {
-        //Returns true if a project is finished
         Calendar today = Calendar.getInstance();
         for (Task t : p.getTasks()) {
             if (t.status != 100) {
                 return false;
             }
         }
-        if (today.after(p.getEstimatedEnd()) || today.equals(p.getEstimatedEnd()))
-            return true;
-        return false;
+        System.out.printf("%s %s %s %s\n", p.getName(), p.getEstimatedEnd().get(Calendar.YEAR), p.getEstimatedEnd().get(Calendar.MONTH), p.getEstimatedEnd().get(Calendar.DAY_OF_MONTH));
+        return today.after(p.getEstimatedEnd());
     }
 
     /**

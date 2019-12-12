@@ -41,31 +41,35 @@ public class Project implements Serializable {
         this.tasks = new ArrayList<>();
     }
 
+
     public void createTask(int type, int id, Calendar startDate, Calendar estimatedFinish, Calendar endTime) {
         if (type == 1)
-            this.tasks.add(new Documentation (id, startDate, estimatedFinish));
-        if(type == 2)
-            this.tasks.add(new Development (id, startDate, estimatedFinish));
-        if(type == 3)
-            this.tasks.add(new Design (id, startDate, estimatedFinish));
+            this.tasks.add(new Documentation(id, startDate, estimatedFinish));
+        if (type == 2)
+            this.tasks.add(new Development(id, startDate, estimatedFinish));
+        if (type == 3)
+            this.tasks.add(new Design(id, startDate, estimatedFinish));
 
     }
-    public ArrayList<Task> listTasks(){
+
+    public ArrayList<Task> listTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        for(Task t: this.tasks){
-            if(t.getStatus() == 100){
+        for (Task t : this.tasks) {
+            if (t.getStatus() == 100) {
                 tasks.add(t);
                 System.out.println(t.getId());
             }
         }
         return tasks;
     }
-    public boolean deleteTask(Task t){
+
+    public boolean deleteTask(Task t) {
         return this.tasks.remove(t);
     }
-    public Task getTaskById(int id){
-        for(Task t: this.tasks){
-            if(t.getId() == id){
+
+    public Task getTaskById(int id) {
+        for (Task t : this.tasks) {
+            if (t.getId() == id) {
                 return t;
             }
         }
@@ -94,19 +98,21 @@ public class Project implements Serializable {
         }
         return tasks;
     }
-    public ArrayList<Task> listConcluded(){
+
+    public ArrayList<Task> listConcluded() {
         ArrayList<Task> tasks = new ArrayList<>();
-        for(Task t : this.tasks){
-            if(t.getStatus() == 100){
+        for (Task t : this.tasks) {
+            if (t.getStatus() == 100) {
                 tasks.add(t);
             }
         }
         return tasks;
     }
-    public ArrayList<Task> listNotConcludedOnDate(Calendar c){
+
+    public ArrayList<Task> listNotConcludedOnDate(Calendar c) {
         ArrayList<Task> tasks = new ArrayList<>();
-        for(Task t : this.tasks){
-            if(t.endTime != null) {
+        for (Task t : this.tasks) {
+            if (t.endTime != null) {
                 if (t.endTime.after(t.getEstimatedFinish())) {
                     tasks.add(t);
                 }
@@ -114,15 +120,17 @@ public class Project implements Serializable {
         }
         return tasks;
     }
+
     public int getTotalPrice() {
         int total = 0;
         for (Scholar s : this.scholars) {
-            int monthSpan = (s.getStartDate().get(Calendar.MONTH) - s.getEndDate().get(Calendar.MONTH)) * 12 + (s.getStartDate().get(Calendar.MONTH) - s.getEndDate().get(Calendar.MONTH)) + 1;
+            int monthSpan = (s.getEndDate().get(Calendar.MONTH) - s.getStartDate().get(Calendar.MONTH)) * 12 + (s.getEndDate().get(Calendar.MONTH) - s.getStartDate().get(Calendar.MONTH)) + 1;
             total += monthSpan * s.getSalary();
         }
         return total;
     }
-    public void closeProject(){
+
+    public void closeProject() {
         this.setFinished(true);
     }
 
@@ -156,6 +164,18 @@ public class Project implements Serializable {
 
     public Calendar getEstimatedEnd() {
         return estimatedEnd;
+    }
+
+    public Calendar getStartDate() {
+        return startDate;
+    }
+
+    public Calendar getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
 
     @Override

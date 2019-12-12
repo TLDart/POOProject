@@ -75,10 +75,11 @@ public class ListNotConcluded {
         back.addActionListener(new ButtonListener());
 
         search.setText("Get Info");
-        search.setActionCommand("get Info");
+        search.setActionCommand("get info");
         search.addActionListener(new ButtonListener());
 
         panel.add(back);
+        panel.add(search);
         return panel;
     }
 
@@ -86,7 +87,11 @@ public class ListNotConcluded {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
-            if (cmd.equals("search")) {//TODO FINISH THIS
+            if (cmd.equals("get info")) {
+                Project p = (Project) list.getSelectedValue();
+                frame.setVisible(false);
+                frame.dispose();
+                new ProjectMainMenu(center, p);
             }
             if (cmd.equals(("back"))) {
                 frame.setVisible(false);

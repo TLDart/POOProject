@@ -10,8 +10,14 @@ public class Development extends Task implements Serializable {
         this.effortRate = 1;
     }
 
-    public Development(int id, Calendar startDate, Calendar estimatedFinish, Person resposible) {
-        super(id, startDate, estimatedFinish, resposible);
+    public Development(int id, Calendar startDate, Calendar estimatedFinish, Person responsible, int status) {
+        super(id, startDate, estimatedFinish, responsible, status);
+        this.effortRate = 1;
+    }
+
+    public Development(int id, Calendar startDate, Calendar estimatedFinish, Person responsible, int status, Calendar endTime) {
+        super(id, status, startDate, estimatedFinish, endTime, responsible);
+        this.effortRate = 1;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package UI;
 
 import Backend.*;
+import com.sun.source.util.TreeScanner;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AddPeople {
     private JFrame frame;
@@ -47,7 +49,6 @@ public class AddPeople {
 
 
         project = new JComboBox<Project>();
-        project.addItem("Choose a project");
         for (Project tester : center.listNotFinished()) {
             project.addItem(tester);
         }
@@ -64,6 +65,7 @@ public class AddPeople {
         teachers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultListCellRenderer renderer = (DefaultListCellRenderer) teachers.getCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        JScrollPane scrollPane = new JScrollPane(teachers);
 
         DefaultListModel<Scholar> listModelB = new DefaultListModel<>();
         for (Scholar s : center.listFreeScholar()) {
@@ -76,13 +78,15 @@ public class AddPeople {
         scholars.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultListCellRenderer renderer2 = (DefaultListCellRenderer) teachers.getCellRenderer();
         renderer2.setHorizontalAlignment(SwingConstants.CENTER);
+        JScrollPane scrollPane2 = new JScrollPane(scholars);
+
 
         panel.add(title);
         panel.add(project);
         panel.add(labelA);
-        panel.add(teachers);
+        panel.add(scrollPane);
         panel.add(labelB);
-        panel.add(scholars);
+        panel.add(scrollPane2);
 
         return panel;
     }
@@ -101,6 +105,7 @@ public class AddPeople {
         button2.setText("Add");
         button2.setActionCommand("add");
         button2.addActionListener(new ButtonListener());
+        button2.setVisible(true);
 
         panel.add(button);
         panel.add(button2);
@@ -112,7 +117,35 @@ public class AddPeople {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
-            if (cmd.equals("add")) {//TODO THIS
+            if (cmd.equals("add")) {
+                try {
+                    Project p = (Project) project.getSelectedItem();
+                    if (p != null) {
+                        for (Object o : teachers.getSelectedValuesList()) {
+                            Teacher t = (Teacher) o;
+                            if (!p.getTeachers().contains(t)) {
+                                center.addTeacherToProject(p, t);
+                                p.getTeachers().add(t);
+                            }
+                        }
+                        for (Object o : scholars.getSelectedValuesList()) {
+                            Scholar s = (Scholar) o;
+                            if (p.getEndDate().after(s.getStartDate()) && s.getProject() == null) {
+                                center.addScholarToProject(p, s);
+                                p.getScholars().add(s);
+                                s.setProject(p);
+                            }
+                        }
+                        JOptionPane.showConfirmDialog(null,
+                                "Added Sucessfully", "Sucess",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
+
+                } catch (ClassCastException j) {
+                    JOptionPane.showConfirmDialog(null,
+                            "Must select a project", "ERROR",
+                            JOptionPane.WARNING_MESSAGE);
+                }
 
             }
             if (cmd.equals(("back"))) {

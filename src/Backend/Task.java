@@ -18,10 +18,20 @@ abstract public class Task implements Serializable {
         this.estimatedFinish = estimatedFinish;
     }
 
-    public Task(int id, Calendar startDate, Calendar estimatedFinish, Person responsible) {
+    public Task(int id, Calendar startDate, Calendar estimatedFinish, Person responsible, int status) {
         this.id = id;
         this.startDate = startDate;
         this.estimatedFinish = estimatedFinish;
+        this.responsible = responsible;
+        this.status = status;
+    }
+
+    public Task(int id, int status, Calendar startDate, Calendar estimatedFinish, Calendar endTime, Person responsible) {
+        this.id = id;
+        this.status = status;
+        this.startDate = startDate;
+        this.estimatedFinish = estimatedFinish;
+        this.endTime = endTime;
         this.responsible = responsible;
     }
 
@@ -39,6 +49,14 @@ abstract public class Task implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public Calendar getEndTime() {
+        return endTime;
+    }
+
+    public Person getResponsible() {
+        return responsible;
     }
 
     public Calendar getEstimatedFinish() {

@@ -10,8 +10,14 @@ public class Documentation extends Task implements Serializable {
         this.effortRate = 0.25;
     }
 
-    public Documentation(int id, Calendar startDate, Calendar estimatedFinish, Person responsible) {
-        super(id, startDate, estimatedFinish, responsible);
+    public Documentation(int id, Calendar startDate, Calendar estimatedFinish, Person responsible, int status) {
+        super(id, startDate, estimatedFinish, responsible, status);
+        this.effortRate = 0.25;
+    }
+
+    public Documentation(int id, Calendar startDate, Calendar estimatedFinish, Person responsible, int status, Calendar endTime) {
+        super(id, status, startDate, estimatedFinish, endTime, responsible);
+        this.effortRate = 0.25;
     }
 
     @Override

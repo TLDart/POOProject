@@ -5,9 +5,12 @@ import Backend.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 
 public class CreateProject extends JFrame {
@@ -116,6 +119,7 @@ public class CreateProject extends JFrame {
         for (Scholar s : center.listFreeScholar())
             peopleListModel.addElement(s);
         peopleList = new JList(peopleListModel);
+
         JScrollPane scholarScroller = new JScrollPane(peopleList);
 
         panel.add(title);
@@ -134,7 +138,6 @@ public class CreateProject extends JFrame {
         JPanel panel = new JPanel();
         JButton button = new JButton();
         JButton button2 = new JButton();
-        button2.setVisible(false);
         panel.setLayout(new GridLayout(1, 2));
 
         button.setText("Back");
@@ -142,7 +145,7 @@ public class CreateProject extends JFrame {
         button.addActionListener(new ButtonListener());
 
         button2.setText("Create");
-        button2.setActionCommand("Create");
+        button2.setActionCommand("create");
         button2.addActionListener(new ButtonListener());
 
         panel.add(button);
@@ -156,12 +159,63 @@ public class CreateProject extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
             String format = "dd-MM-yyyy";
+            Boolean valid = true;
             if (cmd.equals("back")) {
                 frame.setVisible(false);
                 frame.dispose();
                 new MainMenu(center);
             }
-            if (cmd.equals("create")) {//TODO THIS
+            if (cmd.equals("create")) {
+                try {
+                    Date startDate = new SimpleDateFormat(format).parse(String.format("%d-%d-%d", Integer.parseInt(startDateDay.getText()), Integer.parseInt(startDateMonth.getText()), Integer.parseInt(startDateYear.getText())));
+                    Date endDate = new SimpleDateFormat(format).parse(String.format("%d-%d-%d", Integer.parseInt(endDateDay.getText()), Integer.parseInt(endDateMonth.getText()), Integer.parseInt(endDateYear.getText())));
+                    Calendar calendarStart = new GregorianCalendar();
+                    calendarStart.setTime(startDate);
+                    Calendar calendarEnd = new GregorianCalendar();
+                    calendarEnd.setTime(endDate);
+                    ArrayList<Teacher> teacherArrayList = new ArrayList<>();
+                    ArrayList<Scholar> scholarArrayList = new ArrayList<>();
+                    if (calendarStart.before(new GregorianCalendar())) {
+                        JOptionPane.showMessageDialog(null,
+                                "Start date Invalid", "Error",
+                                JOptionPane.WARNING_MESSAGE);
+                        valid = false;
+                    }
+                    Teacher main = (Teacher) mainT.getSelectedItem();
+
+                    for (Object o : teachersList.getSelectedValuesList()) {
+                        Teacher t = (Teacher) o;
+                        if (!teacherArrayList.contains(t))
+                            teacherArrayList.add(t);
+                    }
+                    for (Object o : peopleList.getSelectedValuesList()) {
+                        Scholar s = (Scholar) o;
+                        if (!scholarArrayList.contains(s) && s.getEndDate().before(startDate))
+                            scholarArrayList.add(s);
+                        else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Invalid Scholar", "Error",
+                                    JOptionPane.WARNING_MESSAGE);
+                            valid = false;
+                        }
+                    }
+
+                    if (!name.getText().equals("") && !nick.getText().equals("") && main != null && valid) {
+                        Project p = new Project(name.getText(), nick.getText(), calendarStart, calendarEnd, main, teacherArrayList, scholarArrayList, new ArrayList<Task>());
+                        center.getProjects().add(p);
+                    }
+                    JOptionPane.showConfirmDialog(null,
+                            "Project Created Succesfully", "Success",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (ParseException | NumberFormatException f) {
+                    JOptionPane.showMessageDialog(null,
+                            "InvalidFormat", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                } catch (ClassCastException k) {
+                    JOptionPane.showMessageDialog(null,
+                            "Invalid Main Teacher", "Error",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         }
     }

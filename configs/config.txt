@@ -1,6 +1,33 @@
 Teacher,MaregaJesus,marega@jesus.ceu,69,Obras do Senhor,42069
+Teacher,Lamont Rickaert,lrickaert0@virginia.edu,1,Database Administrator IV,68158
+Teacher,Lodovico Scollard,lscollard1@sbwire.com,2,General Manager,04492
+Teacher,Rae Showler,rshowler2@usda.gov,3,Operator,14601
+Teacher,Laurent Rylance,lrylance3@wiley.com,4,Analyst Programmer,65914
+Teacher,Odey Stephenson,ostephenson4@wikispaces.com,5,Mechanical Systems Engineer,00599
+Teacher,Woodrow Smitherman,wsmitherman5@mail.ru,6,Dental Hygienist,78445
+Teacher,Faythe Chaudret,fchaudret6@rakuten.co.jp,7,Physical Therapy Assistant,73319
+Teacher,Johnathon Sherratt,jsherratt7@geocities.com,8,Marketing Assistant,95775
+Teacher,Rowney Lozano,rlozano8@twitter.com,9,Recruiter,04497
+Teacher,Agnese Gouge,agouge9@tripadvisor.com,10,Business Systems Development Analyst,09715
 Bachelor,Peseiro,peseiro@jafostecocaralho.com,88,1-6-2018,1-9-2018,MaregaJesus
-PhD,Bale,gareth@golfscotlandwales.rip,1337,1-3-2019,3-3-2020,MaregaJesus
-Graduate,Joao Felis,joaofelis@nudes.com,420,12-2-2012,14-4-2014,MaregaJesus
-Project,SportingRevolute,SPCR,10-9-2010,10-20-2025,MaregaJesus,_Peseiro,_Joao Felis,_Bale
-Design,1,12-12-2012,13-13-2014,SportingRevolute,Bale
+PhD,Bale,gareth@golfscotlandwales.rip,1337,1-3-2019,3-3-2020,Johnathon Sherratt
+Graduate,Joao Felis,joaofelis@nudes.com,420,12-2-2012,14-4-2014,Agnese Gouge,Faythe Chaudret
+Bachelor,Rodie Werndly,rwerndly0@webs.com,11,06-02-2021,06-02-2022,Laurent Rylance
+Bachelor,Trix Houseago,thouseago1@princeton.edu,12,15-02-2019,15-02-2020,Odey Stephenson,Faythe Chaudret
+PhD,Tatiania McReedy,tmcreedy2@artisteer.com,13,25-10-2017,25-10-2018,Rowney Lozano,Lodovico Scollard
+Graduate,Gates Jurkiewicz,gjurkiewicz3@clickbank.net,14,18-05-2017,18-05-2019
+Bachelor,Rowan Such,rsuch4@about.com,15,04-05-2017,04-07-2019,Lamont Rickaert
+Graduate,Joelly McNamee,jmcnamee5@statcounter.com,16,08-02-2020,08-02-2023,Rae Showler
+Graduate,Sheff Albany,salbany6@i2i.jp,17,20-07-2019,20-07-2020,Laurent Rylance
+Graduate,Waldo Bottrell,wbottrell7@tmall.com,18,20-07-2016,20-07-2020,Woodrow Smitherman
+Graduate,Cecilia Lowndes,clowndes8@huffingtonpost.com,19,27-01-2018,27-01-2020,Rae Showler
+PhD,Gloria Michal,gmichal9@amazon.co.uk,20,17-12-2019,17-12-2020
+Project,Viva,Viva,10-9-2017,10-20-2020,Rowney Lozano,/Faythe Chaudret,/Johnathon Sherratt
+Project,Transcof,Trans,10-9-2016,10-20-2019,Odey Stephenson,/Agnese Gouge,_Tatiania McReedy
+Project,Konklab,Konk,10-9-2010,10-6-2012,Rae Showler,/Lodovico Scollard
+Project,Regrant,Regr,10-9-2012,10-3-2014,Woodrow Smitherman,/Agnese Gouge,_Joao Felis
+Project,Stringtough,SThough,10-9-2015,10-20-2025,Lamont Rickaert,/Lodovico Scollard,_Sheff Albany
+Project,SportingRevolute,SPCR,10-9-2010,10-12-2025,MaregaJesus,_Peseiro,_Joao Felis,_Bale
+Project,BenficaToUEL,BTUEL,10-9-2015,10-3-2017,Johnathon Sherratt,_Peseiro,_Joao Felis,_Bale
+Project,Ataque Na Academia,ANA,10-9-2017,10-4-2021,Woodrow Smitherman,_Peseiro,_Joao Felis,_Bale
+Design,1,12-12-2012,20-12-2012,SportingRevolute,Bale,100,27-12-2012
