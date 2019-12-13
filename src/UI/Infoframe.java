@@ -119,7 +119,9 @@ public class Infoframe extends JFrame {
                 frame.dispose();
             }
             if (cmd.equals("get info")) {
-                new InframeTask((Task) list.getSelectedValue());
+                Task t = (Task) list.getSelectedValue();
+                if (t != null)
+                    new InframeTask(t);
             }
 
         }

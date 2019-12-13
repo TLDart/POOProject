@@ -154,28 +154,29 @@ public class Center implements Serializable {
                         if (parsedData.length == 7) {//Tasks that do not have a responsible
                             switch (parsedData[0]) {
                                 case "Development":
-                                    getProjectByName(parsedData[5]).getTasks().add(new Development(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd()));
+                                    getProjectByName(parsedData[5]).getTasks().add(new Development(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd()));
                                     break;
                                 case "Design":
-                                    getProjectByName(parsedData[5]).getTasks().add(new Design(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd()));
+                                    getProjectByName(parsedData[5]).getTasks().add(new Design(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd()));
                                     break;
                                 case "Documentation":
-                                    getProjectByName(parsedData[5]).getTasks().add(new Documentation(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd()));
+                                    getProjectByName(parsedData[5]).getTasks().add(new Documentation(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd()));
                                     break;
                             }
                         } else {
                             switch (parsedData[0]) {//Tasks that a responsible but to do not have a finished time
                                 case "Development":
-                                    Development task = new Development(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
+                                    Development task = new Development(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
                                     getProjectByName(parsedData[5]).getTasks().add(task);
                                     getPersonbByName(parsedData[7]).addTask(task);
                                     break;
                                 case "Design":
-                                    Design task2 = new Design(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
+                                    Design task2 = new Design(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
                                     getProjectByName(parsedData[5]).getTasks().add(task2);
+                                    getPersonbByName(parsedData[7]).addTask(task2);
                                     break;
                                 case "Documentation":
-                                    Documentation task3 = new Documentation(Integer.parseInt(parsedData[0]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
+                                    Documentation task3 = new Documentation(Integer.parseInt(parsedData[1]), dates.getCalendarStart(), dates.getCalendarEnd(), getPersonbByName(parsedData[7]), Integer.parseInt(parsedData[6]));
                                     getProjectByName(parsedData[5]).getTasks().add(task3);
                                     getPersonbByName(parsedData[7]).addTask(task3);
                                     break;

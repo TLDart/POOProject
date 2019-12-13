@@ -1,2 +1,0 @@
-MARE.obj
-Shit.obj

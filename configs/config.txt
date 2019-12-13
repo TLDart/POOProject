@@ -31,3 +31,4 @@ Project,SportingRevolute,SPCR,10-9-2010,180,null,MaregaJesus,_Peseiro,_Joao Feli
 Project,BenficaToUEL,BTUEL,10-9-2015,12,10-9-2016,Johnathon Sherratt,_Peseiro,_Joao Felis,_Bale
 Project,Ataque Na Academia,ANA,10-9-2017,48,null,Woodrow Smitherman,_Peseiro,_Joao Felis,_Bale
 Design,1,12-12-2012,20-12-2012,27-12-2012,SportingRevolute,100,Bale
+Design,1,12-12-2019,15-12-2019,null,SportingRevolute,90,Bale
