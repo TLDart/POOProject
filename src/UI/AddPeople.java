@@ -1,7 +1,7 @@
 package UI;
 
 import Backend.*;
-import com.sun.source.util.TreeScanner;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -117,28 +117,46 @@ public class AddPeople {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
+
             if (cmd.equals("add")) {
                 try {
+                    boolean valid = true;
                     Project p = (Project) project.getSelectedItem();
                     if (p != null) {
                         for (Object o : teachers.getSelectedValuesList()) {
                             Teacher t = (Teacher) o;
                             if (!p.getTeachers().contains(t)) {
                                 center.addTeacherToProject(p, t);
-                                p.getTeachers().add(t);
+                            } else {
+                                JOptionPane.showConfirmDialog(null,
+                                        "Teacher Already in the project", "Error",
+                                        JOptionPane.WARNING_MESSAGE);
+                                valid = false;
                             }
                         }
                         for (Object o : scholars.getSelectedValuesList()) {
                             Scholar s = (Scholar) o;
-                            if (p.getEndDate().after(s.getStartDate()) && s.getProject() == null) {
+                            if (s == null) System.out.println("NULL");
+                            if (s.getProject() == null && s.getEndDate().after(p.getStartDate()) && s.getStartDate().before(p.getEstimatedEnd())) {
                                 center.addScholarToProject(p, s);
-                                p.getScholars().add(s);
                                 s.setProject(p);
+                            } else {
+                                JOptionPane.showConfirmDialog(null,
+                                        "Invalid Scholar", "Error",
+                                        JOptionPane.WARNING_MESSAGE);
+                                valid = false;
                             }
                         }
-                        JOptionPane.showConfirmDialog(null,
-                                "Added Sucessfully", "Sucess",
-                                JOptionPane.WARNING_MESSAGE);
+                        if (valid) {
+                            JOptionPane.showConfirmDialog(null,
+                                    "Added Sucessfully", "Success",
+                                    JOptionPane.WARNING_MESSAGE);
+                        }
+
+
+                        frame.setVisible(false);
+                        frame.dispose();
+                        new MainMenu(center);
                     }
 
                 } catch (ClassCastException j) {

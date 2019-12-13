@@ -127,7 +127,7 @@ public class ProjectMainMenu extends JFrame {
                 case "back":
                     if (saveSwitch != 1) {
                         int confirmed = JOptionPane.showConfirmDialog(null,
-                                "You have unsaved! Changes Do You want to go back to the Main Menu?", "Save",
+                                "You have unsaved Changes! Do You want to go back to the Main Menu?", "Save",
                                 JOptionPane.YES_NO_OPTION);
                         if (confirmed == JOptionPane.YES_OPTION) {
                             frame.setVisible(false);
@@ -137,7 +137,7 @@ public class ProjectMainMenu extends JFrame {
                     } else {
                         frame.setVisible(false);
                         frame.dispose();
-                        new LoadMain();
+                        new MainMenu(center);
                     }
                     break;
                 case "save":
@@ -149,9 +149,15 @@ public class ProjectMainMenu extends JFrame {
                     }
                     break;
                 case "Create a task":
-                    frame.setVisible(false);
-                    frame.dispose();
-                    //new CreateProject(center);
+                    if (!project.getFinished()) {
+                        frame.setVisible(false);
+                        frame.dispose();
+                        new CreateTask(center, project);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "You can't a create task on a Finished Project");
+                    }
+
                     break;
                 case "List Task":
                     frame.setVisible(false);
@@ -167,9 +173,12 @@ public class ProjectMainMenu extends JFrame {
                     new ProjectListPeople(center, project);
                     break;
                 case "Finish":
-                    project.setFinished(true);
-                    project.setEndDate(new GregorianCalendar());
-                    new ListNotConcluded(center);
+                    if (center.isFinished(project)) {
+                        project.setFinished(true);
+                        project.setEndDate(new GregorianCalendar());
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You can't finish the project yet. Either you have imcomplete task or it is too soon ");
+                    }
                     break;
             }
         }

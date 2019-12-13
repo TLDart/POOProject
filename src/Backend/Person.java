@@ -10,6 +10,9 @@ abstract public class Person implements Serializable {
     private int id;
     protected ArrayList<Task> tasks;
 
+    /**
+     * Class Constructor with the name,email,id and tasks of a Person
+     */
     public Person(String name, String email, int id, ArrayList<Task> tasks) {
         this.name = name;
         this.email = email;
@@ -17,10 +20,21 @@ abstract public class Person implements Serializable {
         this.tasks = tasks;
     }
 
+    /**
+     * Verifies if said person has a workload of 1 or more
+     *
+     * @param date Date used to verify if the Person is overloaded
+     * @return true if the person is overloaded, false if it is not
+     */
     public boolean overloaded(Calendar date) {
-        return calcWorkload(date) == 1;
+        return calcWorkload(date) >= 1;
     }
 
+    /**
+     * Overrides toString to the person name
+     *
+     * @return person's name
+     */
     @Override
     public String toString() {
         return this.name;
@@ -39,33 +53,57 @@ abstract public class Person implements Serializable {
     public float calcWorkload(Calendar date) {
         float workload = 0;
         for (Task t : this.tasks) {
-            if (date.after(t.getStartDate()) && date.before(t.getEstimatedFinish())) {
+            if ((date.after(t.getStartDate()) || date.equals(t.getStartDate())) && date.before(t.getEstimatedFinish())) {
                 workload += t.getEffortRate();
             }
         }
         return workload;
     }
 
+    /**
+     * Adds a task to the task array
+     *
+     * @param t Task to add
+     * @see Task
+     */
     public void addTask(Task t) {
         this.tasks.add(t);
     }
 
+    /**
+     * Removes the task from the task array
+     *
+     * @param t Task to remove
+     * @see Task
+     */
     public void remTask(Task t) {
         this.tasks.remove(t);
     }
 
+    /**
+     * @return Returns the person's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Returns the person's email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @return Returns the person's id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return Returns an array list with the person's tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }

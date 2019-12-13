@@ -88,9 +88,14 @@ public class ListConcluded {
             String cmd = e.getActionCommand();
             if (cmd.equals("get info")) {
                 Project p = (Project) list.getSelectedValue();
-                frame.setVisible(false);
-                frame.dispose();
-                new ProjectMainMenu(center, p);
+                if (p == null) {
+                    JOptionPane.showMessageDialog(null, "You need to select a component first", "Error", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    frame.setVisible(false);
+                    frame.dispose();
+                    new ProjectMainMenu(center, p);
+                }
+
             }
             if (cmd.equals(("back"))) {
                 frame.setVisible(false);

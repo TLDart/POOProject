@@ -1,0 +1,3 @@
+Bachelor,Peseiro,peseiro@jafostecocaralho.com,1-6-2018,1-9-2018,MaregaJesus
+PhD,Bale,gareth@golfscotlandwales.rip,1-3-2019,3-3-2020,MaregaJesus
+Graduate,Joao Felis,joaofelis@nudes.com,420,12-2-2012,14-4-2014,MaregaJesus

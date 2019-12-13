@@ -45,13 +45,14 @@ public class LoadMain extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         JLabel label = new JLabel("Welcome to Marenager");
-        label.setFont(new Font("Monaco", Font.PLAIN, 20));
+        label.setFont(new Font("Arial", Font.PLAIN, 20));
         ButtonGroup group = new ButtonGroup();
-        optionA = new JRadioButton("I want to create a new Project");
+        optionA = new JRadioButton("I want to create a new Center");
         optionA.addActionListener(new ButtonListener());
         optionA.setActionCommand("New Project");
+        optionA.setSelected(true);
         group.add(optionA);
-        optionB = new JRadioButton("I already have a project");
+        optionB = new JRadioButton("I already have a Center");
         optionB.addActionListener(new ButtonListener());
         optionB.setActionCommand("Load Project");
 
@@ -143,7 +144,6 @@ public class LoadMain extends JFrame {
             center = (Center) os.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.print("RIP");
             center = null;
         }
         return center;
@@ -154,7 +154,7 @@ public class LoadMain extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
-            System.out.println(cmd);
+            //System.out.println(cmd);
             if (cmd.equals("next")) {
                 if (optionA.isSelected()) {
                     frame.setVisible(false);

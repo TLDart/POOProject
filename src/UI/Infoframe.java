@@ -37,7 +37,34 @@ public class Infoframe extends JFrame {
     }
 
     public JPanel drawPanel() {
-        JPanel panel = new JPanel(new GridLayout(2, 1));
+        JPanel panel = new JPanel(new GridLayout(3, 1));
+
+        JLabel title = new JLabel("Information");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel innerPanel = new JPanel(new GridLayout(3, 2));
+        JLabel nameLabel = new JLabel("Name");
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel name = new JLabel(person.getName());
+        name.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel emailLabel = new JLabel("Email");
+        emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel email = new JLabel(person.getEmail());
+        email.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JLabel idLabel = new JLabel("ID");
+        idLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JLabel id = new JLabel(String.valueOf(person.getId()));
+        id.setHorizontalAlignment(SwingConstants.CENTER);
+
+        innerPanel.add(nameLabel);
+        innerPanel.add(name);
+        innerPanel.add(idLabel);
+        innerPanel.add(id);
+        innerPanel.add(emailLabel);
+        innerPanel.add(email);
+
 
         DefaultListModel<Backend.Task> listModel = new DefaultListModel<>();
 
@@ -54,7 +81,9 @@ public class Infoframe extends JFrame {
         JScrollPane listScroller = new JScrollPane(list);
 
         String sText = String.format("<html>Information<br/>Name: %s <br/> Email: %s<br/> ID: %d</html>", person.getName(), person.getEmail(), person.getId()); //Make a formatted string, same label but with a breakline
-        panel.add(new JLabel(sText));
+
+        panel.add(title);
+        panel.add(innerPanel);
         panel.add(listScroller);
         panel.setVisible(true);
         return panel;

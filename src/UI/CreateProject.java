@@ -17,7 +17,7 @@ public class CreateProject extends JFrame {
     JComboBox mainT;
     private JFrame frame;
     private JPanel panelA, panelB;
-    private JTextField name, nick, startDateDay, startDateMonth, startDateYear, endDateDay, endDateMonth, endDateYear;
+    private JTextField name, nick, startDateDay, startDateMonth, startDateYear, duration;
     private Center center;
     private JList teachersList, peopleList;
 
@@ -75,20 +75,14 @@ public class CreateProject extends JFrame {
         startDatePanel.add(startDateMonth);
         startDatePanel.add(startDateYear);
 
-        JPanel endDatePanel = new JPanel(new GridLayout(1, 4));
-        JLabel endDateLabel = new JLabel("EndDate");
-        endDateLabel.setToolTipText("dd-mm-yyyy");
-        endDateDay = new JTextField(2);
-        endDateDay.setHorizontalAlignment(SwingConstants.CENTER);
-        endDateMonth = new JTextField(2);
-        endDateMonth.setHorizontalAlignment(SwingConstants.CENTER);
-        endDateYear = new JTextField(4);
-        endDateYear.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel endDatePanel = new JPanel(new GridLayout(1, 2));
+        JLabel endDateLabel = new JLabel("Duration");
+
+        duration = new JTextField(3);
+        duration.setHorizontalAlignment(SwingConstants.CENTER);
 
         endDatePanel.add(endDateLabel);
-        endDatePanel.add(endDateDay);
-        endDatePanel.add(endDateMonth);
-        endDatePanel.add(endDateYear);
+        endDatePanel.add(duration);
 
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new GridLayout(2, 2));
@@ -159,7 +153,7 @@ public class CreateProject extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
             String format = "dd-MM-yyyy";
-            Boolean valid = true;
+            boolean valid = true;
             if (cmd.equals("back")) {
                 frame.setVisible(false);
                 frame.dispose();
@@ -168,11 +162,9 @@ public class CreateProject extends JFrame {
             if (cmd.equals("create")) {
                 try {
                     Date startDate = new SimpleDateFormat(format).parse(String.format("%d-%d-%d", Integer.parseInt(startDateDay.getText()), Integer.parseInt(startDateMonth.getText()), Integer.parseInt(startDateYear.getText())));
-                    Date endDate = new SimpleDateFormat(format).parse(String.format("%d-%d-%d", Integer.parseInt(endDateDay.getText()), Integer.parseInt(endDateMonth.getText()), Integer.parseInt(endDateYear.getText())));
                     Calendar calendarStart = new GregorianCalendar();
                     calendarStart.setTime(startDate);
-                    Calendar calendarEnd = new GregorianCalendar();
-                    calendarEnd.setTime(endDate);
+
                     ArrayList<Teacher> teacherArrayList = new ArrayList<>();
                     ArrayList<Scholar> scholarArrayList = new ArrayList<>();
                     if (calendarStart.before(new GregorianCalendar())) {
@@ -201,12 +193,12 @@ public class CreateProject extends JFrame {
                     }
 
                     if (!name.getText().equals("") && !nick.getText().equals("") && main != null && valid) {
-                        Project p = new Project(name.getText(), nick.getText(), calendarStart, calendarEnd, main, teacherArrayList, scholarArrayList, new ArrayList<Task>());
+                        Project p = new Project(name.getText(), nick.getText(), calendarStart, Integer.parseInt(duration.getText()), main, teacherArrayList, scholarArrayList, new ArrayList<Task>());
                         center.getProjects().add(p);
                     }
                     JOptionPane.showConfirmDialog(null,
                             "Project Created Succesfully", "Success",
-                            JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.OK_CANCEL_OPTION);
                 } catch (ParseException | NumberFormatException f) {
                     JOptionPane.showMessageDialog(null,
                             "InvalidFormat", "Error",
