@@ -28,3 +28,4 @@ The best example of this is the fact that the loading of the center from an obj 
 
 ## Known Bugs/Errors
 * You can't add task to the main Teacher in a project
+* Because of the difference between referencing between Widowns and Unix/MacOS, this might not work in windows
