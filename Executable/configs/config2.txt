@@ -1,0 +1,36 @@
+Teacher,Tomás Mateus Taveira,ttmateus@dei.uc.pt,6001,Arquitetura de Computadores,69
+Teacher,Georgina Ronaldo Carvalho,gigi@dei.uc.pt,7007,Segurança,07
+Teacher,Diogo António Berlusconi,berlusconi@dei.uc.pt,1234,Informática Médica,15
+Teacher,José Coimbra Afonso,zecafonso@dei.uc.pt,0938,Redes,74
+Teacher,Pedro Daniel Bruno Fernandes,pedroscp@dei.uc.pt,5748,Computação Evolucionária,18
+Teacher,Paulo Ernesto Rodrigues,paulo@dei.uc.pt,0001,Sistemas de Informação,01
+PhD,Rodrigo Giesteira de Almeida,giestas@gmail.com,042,20-04-2019,20-04-2020
+Bachelor,António Jorge Mendes,mendez@live.pt,045,03-11-15-2019,15-05-2020,José Coimbra Afonso,Diogo António Berlusconi
+Graduate,Vitor Manuel Santos,vitri@gmail.com,443,21-03-2018,03-03-2021,Diogo António Berlusconi,Tomás Mateus Taveira
+PhD,João Felix Sequeira,goldenboy@gmail.com,1337,23-11-2018,13-03-2021
+Bachelor,Marisa Jorge Jesus,rosabranca@hotmail.com,89,12-12-2019,17-06-2022,Tomás Mateus Taveira,Georgina Ronaldo Carvalho
+Bachelor,Joaquim Alberto Gonçalves,quimovelha@gmail.com,67,10-10-2017,08-07-2020,Georgina Ronaldo Carvalho,José Coimbra Afonso
+PhD,António Pampilhosa Carreira,p_lagio@hotmail.com,44,16-05-2017,18-12-2019
+Bachelor,Sérgio Afonso Henriques de Portugal,serginho@live.pt,56,12-04-2019,15-03-2020,Pedro Daniel Bruno Fernandes
+Graduate,Gonçalo Santos Amaro,nothepriest@gmail.com,55,01-02-2019,05-05-2021,Pedro Daniel Bruno Fernandes,Tomás Mateus Taveira
+PhD,Justina Maria Leal,marialeal@sapo.pt,67,09-07-2017,30-02-2019
+Bachelor,Luis Manuel Onassis,luiozau@gmail.com,44,05-08-2019,03-11-2021,Paulo Ernesto Rodrigues,José Coimbra Afonso
+PhD,Gabriel Flórido Coelho,gabro@gmail.com,34,04-02-2018,30-03-2020
+Graduate,Carlos Diogo Mourinho,mourinho@gmail.com,69,05-05-2019,06-06-2020,Tomás Mateus Taveira
+Project,Long distance control remote app,LDCR,03-04-2019,12,null,Tomás Mateus Taveira,/Georgina Ronaldo Carvalho,_Sérgio Afonso Henriques de Portugal,_Rodrigo Giesteira de Almeida
+Project,SHA 256 crack,SHA,06-09-2018,6,23-5-2018,José Coimbra Afonso,/Diogo António Berlusconi,_Justina Maria Leal,_Vitor Manuel Santos,_Joaquim Alberto Gonçalves
+Project,Google Deepmind Alphazero's demise,Google Deepmind,12-12-2019,12,null,Paulo Ernesto Rodrigues,_Gonçalo Santos Amaro,_Marisa Jorge Jesus,_Luis Manuel Onassis,_Gabriel Flórido Coelho
+Project,GNS3 replacement,GNS3,23-11-2018,12,12-12-2019,Pedro Daniel Bruno Fernandes,_António Pampilhosa Carreira,_Sérgio Afonso Henriques de Portugal,_Luis Manuel Onassis,_Vitor Manuel Santos
+Development,001,13-12-019,17-12-2019,null,Long distance control remote app,100,Tomás Mateus Taveira
+Design,002,13-12-2019,17-12-2019,null,Long distance control remote app,56,Sérgio Afonso Henriques de Portugal
+Design,003,13-12-2019,14-12-2019,15-12-2019,Long distance control remote app,100,Sérgio Afonso Henriques de Portugal
+Documentation,004,13-12-2019,17-12-2019,null,Long distance control remote app,100,Rodrigo Giesteira de Almeida
+Development,005,13-12-2019,17-12-2019,null,Long distance control remote app,100,Georgina Ronaldo Carvalho
+Design,006,03-08-2018,06-09-2018,06-09-2018,SHA 256 crack,35,Diogo António Berlusconi
+Development,007,03-08-2018,06-09-2018,08-09-2018,SHA 256 crack,63,Justina Maria Leal
+Documentation,008,03-08-2018,06-09-2018,06-09-2018,SHA 256 crack,100,Vitor Manuel Santos
+Development,009,03-08-2018,06-09-2018,08-09-2018,SHA 256 crack,23,Joaquim Alberto Gonçalves
+Development,010,10-12-2020,11-12-2020,null,Google Deepmind Alphazero's demise,0,Gonçalo Santos Amaro
+Development,011,10-12-2020,11-12-2020,null,Google Deepmind Alphazero's demise,0,Luis Manuel Onassis
+Development,012,04-05-2019,04-05-2019,null,GNS3 replacement,100,Luis Manuel Onassis
+Design,013,04-05-2019,04-05-2019,12-05-2019,GNS3 replacement,100,António Pampilhosa Carreira
