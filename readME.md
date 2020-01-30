@@ -4,6 +4,8 @@ Small Java-based project, where you can expect:
 * Hierarchy
 * Jframe based GUI
 
+The version used in this program was Java 8 Update 241
+
 ## Lore
 This small, GUI-based, project that bases on the current day to organized and schedules task to defined project in a center
 Note: because of project restriction it was not allowed to use either getClass() and static methods, therefore some could can look less clear/repetitive but I could not find a better way to do it;
@@ -25,4 +27,4 @@ The best example of this is the fact that the loading of the center from an obj 
 
 
 ## Known Bugs/Errors
-* You can't a task to the main of the project
+* You can't add task to the main Teacher in a project
